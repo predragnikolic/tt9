@@ -36,3 +36,10 @@ jobs:
       run: ./gradlew lint # this actually runs mergeResources, so it must come after the dictionary tasks
     - name: Build 'Lite' and 'Full' APK variants
       run: ./gradlew assembleLiteRelease assembleFullRelease
+
+    - name: Upload Lite APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: app-lite-release
+        path: |
+          '**/build/outputs/apk/**/release/*lite*-release*.apk'
