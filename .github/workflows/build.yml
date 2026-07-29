@@ -37,6 +37,16 @@ jobs:
     - name: Build 'Lite' and 'Full' APK variants
       run: ./gradlew assembleLiteRelease assembleFullRelease
 
+    - name: List APK outputs (debug)
+      run: |
+        echo "=== Finding APK files ==="
+        find . -path "*/build/outputs/apk/*" -type f -name '*.apk' -print || true
+        echo "=== Detailed APK directories ==="
+        for d in $(find . -type d -path "*/build/outputs/apk/*" -print); do
+          echo "---- $d ----"
+          ls -al "$d" || true
+        done
+
     - name: Upload Lite APK
       uses: actions/upload-artifact@v4
       with:
